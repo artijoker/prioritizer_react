@@ -15,7 +15,8 @@ class Field extends Component<Props & HTMLAttributes<HTMLDivElement>, State> {
   private maxLength: number;
   private height: number;
   private borderPX: number;
-  private isGameOver:boolean;
+  private isGameOver: boolean;
+
   constructor(props: Props) {
     super(props);
     this.height = window.innerHeight - 100;
@@ -47,46 +48,14 @@ class Field extends Component<Props & HTMLAttributes<HTMLDivElement>, State> {
 
   }
   render() {
+    let columns = this.createColumns(6);
     return <div className="Field">
       <div className="row">
         <div className='col-9'>
           <div className='columns'
             style={{ height: this.height, border: "black " + this.borderPX + "px solid" }}>
             <div className='row d-flex justify-content-around'>
-              <Column maxLength={this.maxLength}
-                isGameOn={this.isGameOn}
-                increaseScore={this.increaseScore}
-                gameOver={this.gameOver} />
-
-              <Column maxLength={this.maxLength}
-                isGameOn={this.isGameOn}
-                increaseScore={this.increaseScore}
-                gameOver={this.gameOver} />
-
-              <Column maxLength={this.maxLength}
-                isGameOn={this.isGameOn}
-                increaseScore={this.increaseScore}
-                gameOver={this.gameOver} />
-
-              <Column maxLength={this.maxLength}
-                isGameOn={this.isGameOn}
-                increaseScore={this.increaseScore}
-                gameOver={this.gameOver} />
-
-              <Column maxLength={this.maxLength}
-                isGameOn={this.isGameOn}
-                increaseScore={this.increaseScore}
-                gameOver={this.gameOver} />
-
-              <Column maxLength={this.maxLength}
-                isGameOn={this.isGameOn}
-                increaseScore={this.increaseScore}
-                gameOver={this.gameOver} />
-
-              <Column maxLength={this.maxLength}
-                isGameOn={this.isGameOn}
-                increaseScore={this.increaseScore}
-                gameOver={this.gameOver} />
+              {columns}
             </div>
           </div>
         </div>
@@ -119,6 +88,17 @@ class Field extends Component<Props & HTMLAttributes<HTMLDivElement>, State> {
     </div>
   }
 
+  createColumns(quantity: number): JSX.Element[] {
+    let columns = [];
+    for (let index = 0; index < quantity; index++) {
+      columns.push(<Column maxLength={this.maxLength}
+        isGameOn={this.isGameOn}
+        increaseScore={this.increaseScore}
+        gameOver={this.gameOver} />
+      );
+    }
+    return columns;
+  }
 
 }
 
